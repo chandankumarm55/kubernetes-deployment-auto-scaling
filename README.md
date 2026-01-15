@@ -234,9 +234,7 @@ Inside pod:
 ```sh
 while true; do wget -q -O- http://portfolio-service; done
 ```
-
-[View Scaling Output Screenshot](https://drive.google.com/file/d/1YnPtj6rLtjagFjo9DJJ9B_CTKgW8ZvR7/view?usp=sharing)
-
+![Kubernetes Auto Scaling Output](https://raw.githubusercontent.com/<your-username>/<repo-name>/main/images/scaling.png)
 
 ### Watch scaling
 
