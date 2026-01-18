@@ -1,12 +1,12 @@
-# 🚀 Portfolio Project — Docker → Kubernetes → Scaling Guide
+# Portfolio Project — Docker → Kubernetes → Scaling Guide
 
 This README explains **how to deploy the Portfolio React app using Docker and Kubernetes**, and how to **scale it and test load** step by step.
 
-> ✅ Tested with: Windows + Docker Desktop + Minikube (kubectl)
+>  Tested with: Windows + Docker Desktop + Minikube (kubectl)
 
 ---
 
-## 📌 Prerequisites
+##  Prerequisites
 
 Make sure you have:
 
@@ -24,9 +24,9 @@ kubectl config current-context
 
 ---
 
-## 🧱 Step 1 — Dockerize the React App (Nginx)
+## Step 1 — Dockerize the React App (Nginx)
 
-### 📄 Dockerfile
+###  Dockerfile
 
 ```dockerfile
 # Step 1: Build React app
@@ -44,11 +44,11 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-> ⚠️ Note: If using Create-React-App, replace `/app/dist` with `/app/build`.
+>  Note: If using Create-React-App, replace `/app/dist` with `/app/build`.
 
 ---
 
-## 🐳 Step 2 — Build & Push Docker Image
+##  Step 2 — Build & Push Docker Image
 
 ```bash
 docker build -t chandankumar55/portfolio:latest .
@@ -61,9 +61,9 @@ Kubernetes pulls images from registries like Docker Hub, not from your local sys
 
 ---
 
-## ☸️ Step 3 — Kubernetes Deployment
+##  Step 3 — Kubernetes Deployment
 
-### 📄 deployment.yaml
+###  deployment.yaml
 
 ```yaml
 apiVersion: apps/v1
@@ -94,7 +94,7 @@ spec:
             memory: "256Mi"
 ```
 
-### 📄 service.yaml
+###  service.yaml
 
 ```yaml
 apiVersion: v1
@@ -133,7 +133,7 @@ http://localhost:30006
 
 ---
 
-## 🔁 Step 4 — Manual Scaling (Horizontal Scaling)
+##  Step 4 — Manual Scaling (Horizontal Scaling)
 
 Increase pods:
 
@@ -147,7 +147,7 @@ Verify:
 kubectl get pods
 ```
 
-### ✅ How traffic is handled
+###  How traffic is handled
 
 Kubernetes Service load-balances requests:
 
@@ -159,9 +159,9 @@ Request → Pod C
 
 ---
 
-## 📈 Step 5 — Auto Scaling with HPA (Horizontal Pod Autoscaler)
+##  Step 5 — Auto Scaling with HPA (Horizontal Pod Autoscaler)
 
-> ⚠️ HPA requires **Metrics Server**. Works best in **Minikube** or cloud clusters.
+>  HPA requires **Metrics Server**. Works best in **Minikube** or cloud clusters.
 
 ### Enable metrics in Minikube
 
@@ -178,7 +178,7 @@ kubectl top pods
 
 ---
 
-### 📄 hpa.yaml
+###  hpa.yaml
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -215,7 +215,7 @@ kubectl get hpa
 
 ---
 
-## 🔥 Step 6 — Generate Load (Test Autoscaling)
+##  Step 6 — Generate Load (Test Autoscaling)
 
 ### Delete old test pods
 
@@ -249,7 +249,7 @@ If CPU increases and metrics are working, new pods will be created automatically
 
 ---
 
-## ⚠️ Important Reality
+##  Important Reality
 
 Frontend apps (React + Nginx):
 
@@ -262,7 +262,7 @@ Best autoscaling demo:
 
 ---
 
-## 🔄 Rolling Updates (Zero Downtime)
+##  Rolling Updates (Zero Downtime)
 
 Push new image version and update:
 
@@ -281,7 +281,7 @@ Kubernetes will:
 
 ---
 
-## 📦 Production Architecture
+##  Production Architecture
 
 ```
 Users
